@@ -1,0 +1,401 @@
+/* =============================
+   GENERAL RESET & FONT
+   ============================= */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: Arial, sans-serif;
+}
+
+body {
+  background: #ffffff; /* white background */
+  color: #333333;
+}
+
+/* =============================
+   LAYOUT
+   ============================= */
+.layout {
+  display: flex;
+  min-height: 100vh;
+}
+
+/* SIDEBAR */
+.sidebar {
+  width: 220px;
+  background: #1a1f71; /* navy */
+  color: white;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+}
+
+.sidebar a {
+  display: block;
+  color: white;
+  text-decoration: none;
+  margin: 12px 0;
+  padding: 8px 12px;
+  border-radius: 5px;
+  transition: background 0.2s;
+}
+
+.sidebar a:hover {
+  background: #3a44c1; /* hover blue */
+}
+
+/* HEADER */
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20px;
+  background: #f2f2f2; /* gray header */
+  border-bottom: 1px solid #ccc;
+}
+
+.header button {
+  background: #1a1f71;
+  color: white;
+  border: none;
+  padding: 8px 12px;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.header button:hover {
+  background: #3a44c1;
+}
+
+/* MAIN CONTENT */
+.main {
+  flex: 1;
+  padding: 25px;
+}
+
+/* BUTTONS */
+button {
+  cursor: pointer;
+}
+
+/* FORM STYLING */
+form {
+  background: #f9f9f9;
+  padding: 20px;
+  border-radius: 8px;
+  max-width: 500px;
+}
+
+input, select {
+  width: 100%;
+  padding: 10px;
+  margin: 10px 0;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+}
+
+button.submit-btn {
+  background: #1a1f71;
+  color: white;
+  border: none;
+  padding: 10px 15px;
+  margin-top: 10px;
+  border-radius: 6px;
+}
+
+button.submit-btn:hover {
+  background: #3a44c1;
+}
+
+/* TABLE STYLING */
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 20px;
+}
+
+th, td {
+  padding: 12px;
+  border-bottom: 1px solid #ccc;
+  text-align: left;
+}
+
+th {
+  background: #f2f2f2;
+}
+
+/* BACK BUTTON */
+.back-btn {
+  background: #1a1f71;
+  color: white;
+  border: none;
+  padding: 8px 12px;
+  margin-bottom: 15px;
+  border-radius: 5px;
+}
+
+.back-btn:hover {
+  background: #3a44c1;
+}
+
+/* RESPONSIVE */
+@media screen and (max-width: 768px) {
+  .layout {
+    flex-direction: column;
+  }
+
+  .sidebar {
+    width: 100%;
+    flex-direction: row;
+    justify-content: space-around;
+  }
+
+  .sidebar a {
+    margin: 8px 0;
+    font-size: 14px;
+  }
+}
+/* Logo in sidebar */
+.sidebar .logo img {
+  width: 150px;
+  opacity: 0.7;
+  margin-bottom: 20px;
+}
+
+/* Profile circle */
+.user-login {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.profile-circle {
+  width: 35px;
+  height: 35px;
+  border-radius: 50%;
+  background-color: navy;
+  color: white;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-weight: bold;
+}
+
+/* Center Add Employee form */
+.add-employee-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.add-employee-container form {
+  width: 100%;
+  max-width: 400px;
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  
+}
+/* LOGIN PAGE */
+.login-page {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh; /* full viewport height */
+  background-color: #f5f6fa; /* light background */
+}
+
+.login-container {
+  background-color: white;
+  padding: 30px 25px;
+  border-radius: 10px;
+  box-shadow: 0 6px 15px rgba(0,0,0,0.1);
+  width: 100%;
+  max-width: 400px;
+  text-align: center;
+}
+
+.login-container h2 {
+  margin-bottom: 20px;
+  color: navy;
+}
+
+.login-container input {
+  width: 100%;
+  padding: 10px;
+  margin: 10px 0;
+  border-radius: 5px;
+  border: 1px solid #ccc;
+}
+
+.login-container button {
+  width: 100%;
+  padding: 10px;
+  margin-top: 10px;
+  background-color: navy;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 16px;
+}
+
+.login-container button:hover {
+  background-color: #333366;
+}
+/* Tabs */
+.tabs {
+  display: flex;
+  gap: 10px;
+  margin: 20px 0;
+}
+
+.tab {
+  padding: 10px 18px;
+  border: none;
+  background: #e5e7eb;
+  cursor: pointer;
+  border-radius: 6px;
+}
+
+.tab.active {
+  background: #1e3a8a;
+  color: white;
+}
+
+.tab-content {
+  display: none;
+  background: white;
+  padding: 20px;
+  border-radius: 10px;
+}
+
+.tab-content.active {
+  display: block;
+}
+
+/* Forms */
+.form-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr; /* keep 2 columns */
+  gap: 20px; /* more space between columns */
+}
+
+.form-grid input,
+.form-grid select,
+.form-grid textarea {
+  padding: 14px;           /* bigger padding for readability */
+  border-radius: 6px;
+  border: 1px solid #ccc;
+  width: 100%;
+  min-width: 0;            /* fixes text cutoff in grid */
+  box-sizing: border-box;
+  font-size: 16px;         /* larger font */
+}
+
+/* Make file uploads, address, and long fields span full width */
+.form-grid input[type="file"],
+.form-grid textarea,
+.form-grid input[name="address"],
+.form-grid input[name="visaCopy"],
+.form-grid input[name="passportCopy"],
+.form-grid input[name="photo"] {
+  grid-column: span 2;     /* take full row */
+}
+
+/* Optional: increase form container width */
+.add-employee-container form {
+  max-width: 700px;        /* bigger form */
+}
+
+/* Make file uploads and address fields span full width */
+.form-grid input[type="file"],
+.form-grid textarea,
+.form-grid input[name="address"] {
+  grid-column: span 2;     /* take full row */
+}
+
+
+/* Save button */
+.save-btn {
+  margin-top: 20px;
+  padding: 12px 20px;
+  background: #1e3a8a;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+}
+.save-btn:hover {
+  background: #374bbf;
+}
+/* ==============================
+   ADD EMPLOYEE FORM - SIDE BY SIDE GRID
+   ============================== */
+.add-employee-container form {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr); /* 3 columns side by side */
+  gap: 15px;
+  padding: 20px;
+  background: #f9f9f9;
+  border-radius: 10px;
+}
+
+/* Make all inputs, selects, file uploads full width */
+.add-employee-container form input,
+.add-employee-container form select,
+.add-employee-container form textarea,
+.add-employee-container form button {
+  width: 100%;
+  padding: 10px;
+  border-radius: 6px;
+  border: 1px solid #ccc;
+  font-size: 14px;
+}
+
+/* Textarea spans all columns */
+.add-employee-container form textarea {
+  grid-column: span 3;
+  resize: none;
+}
+
+/* Save button spans all columns */
+.add-employee-container form button.save-btn {
+  grid-column: span 3;
+  background: navy;
+  color: white;
+  border: none;
+  cursor: pointer;
+  font-weight: bold;
+}
+
+.add-employee-container form button.save-btn:hover {
+  background: darkblue;
+}
+/* Attendance status dropdown styling */
+.status-dropdown {
+  padding: 6px 10px;
+  border-radius: 6px;
+  border: 1px solid #ccc;
+  font-weight: bold;
+  cursor: pointer;
+  color: white; /* text color */
+}
+
+/* Different colors for options */
+.status-dropdown option[value="Active"] {
+  background-color: #28a745; /* green */
+  color: white;
+}
+
+.status-dropdown option[value="On Leave"] {
+  background-color: #dc3545; /* red */
+  color: white;
+}
+
+/* When dropdown selected, show color based on value */
+.status-dropdown:focus,
+.status-dropdown:active {
+  color: white;
+}

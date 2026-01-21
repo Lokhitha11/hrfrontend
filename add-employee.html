@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Add Employee</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<div class="layout">
+
+  <!-- Sidebar -->
+  <aside class="sidebar">
+    <div class="logo">
+      <img src="SUH-Logov5.png" alt="Company Logo">
+    </div>
+    <a href="index.html">Dashboard</a>
+    <a href="add-employee.html" class="active">Add Employee</a>
+    <a href="employee-list.html">Employee List</a>
+    <a href="attendance.html">Attendance</a>
+    <a href="payroll.html">Payroll</a>
+  </aside>
+
+  <!-- Main Content -->
+  <main class="main">
+    <header class="header">
+      <h1>Add Employee</h1>
+      <div class="user-login">
+        <span id="username">HR</span>
+        <div class="profile-circle">H</div>
+        <button onclick="location.href='login.html'">Login</button>
+      </div>
+    </header>
+
+    <section class="add-employee-container">
+      <form id="employeeForm" class="form-grid" enctype="multipart/form-data">
+        <input type="text" placeholder="Full Name" name="name" required />
+        <input type="email" placeholder="Email" name="email" required />
+        <input type="text" placeholder="Gender" name="gender" required />
+        <input type="text" placeholder="Designation" name="designation" required />
+        <input type="text" placeholder="Department" name="department" required />
+        <input type="text" placeholder="Origin Country" name="originCountry" required />
+       <div class="form-group">
+        <label for="dob">Date of Birth</label>
+        <input type="date" id="dob" name="dob" required /></div>
+        <input type="text" placeholder="Father's Name" name="fatherName" required />
+        <input type="text" placeholder="Contact Number" name="contact" required />
+        <input type="text" placeholder="Residential Address" name="Residentialaddress" required />
+        <input type="text" placeholder="Permanent Address" name="permanentAddress" required />
+        <div class="form-group">
+        <label for="doj">Date of Joining</label>
+        <input type="date" id="doj" name="doj" required /></div>
+        <input type="text" placeholder="Visa Number" name="visaNumber" required />
+        <input type="file" accept="image/*" name="visaCopy" required />
+        <input type="text" placeholder="Passport Number" name="passportNumber" required />
+        <input type="file" accept="image/*" name="passportCopy" required />
+        <div class="form-group">
+        <label for="photo">Contract</label>
+        <input type="file" accept="image/*" name="photo" required /></div>
+        <input type="number" placeholder="Basic Salary" name="salary" required />
+        <select name="status" required>
+          <option value="">Status</option>
+          <option value="Active">Active</option>
+          <option value="On Leave">On Leave</option>
+        </select>
+        <button type="submit" class="save-btn">Save Employee</button>
+      </form>
+    </section>
+
+  </main>
+</div>
+
+<script type="module" src="employee.js"></script>
+</body>
+</html>

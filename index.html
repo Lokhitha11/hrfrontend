@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Dashboard</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<div class="layout">
+  <aside class="sidebar">
+    <div class="logo">
+    <img src="SUH-Logov5.png" alt="Company Logo" />
+    </div>
+    <a href="index.html">Dashboard</a>
+    <a href="add-employee.html">Add Employee</a>
+    <a href="employee-list.html">Employee List</a>
+    <a href="attendance.html">Attendance</a>
+    <a href="payroll.html">Payroll</a>
+  </aside>
+
+  <main class="main">
+    <header class="header">
+  <h1>Employees</h1>
+  <div class="user-login">
+    <span id="username">HR</span>
+    <div class="profile-circle">H</div>
+    <button onclick="location.href='login.html'">Login</button>
+  </div>
+</header>
+
+
+    <section class="cards">
+      <div class="card">Total Employees: <span id="totalEmployees">0</span></div>
+      <div class="card">Today's Attendance: <span id="todayAttendance">0</span></div>
+      <div class="card">Monthly Payroll: ₹<span id="totalPayroll">0</span></div>
+      <div class="card">Other Info</div>
+    </section>
+  </main>
+</div>
+
+</body>
+</html>

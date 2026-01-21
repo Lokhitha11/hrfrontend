@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Employee Profile</title>
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+<div class="layout">
+
+  <!-- Sidebar -->
+  <aside class="sidebar">
+    <h2 class="logo">Company</h2>
+    <a href="index.html">Dashboard</a>
+    <a href="employee-list.html">Employees</a>
+    <a href="attendance.html">Attendance</a>
+    <a href="payroll.html">Payroll</a>
+  </aside>
+
+  <!-- Main -->
+  <main class="main">
+
+    <header class="header">
+      <h1>Employee Profile</h1>
+      <button onclick="location.href='employee-list.html'">⬅ Back</button>
+    </header>
+
+    <!-- Tabs -->
+    <div class="tabs">
+      <button class="tab active" onclick="openTab(event,'personal')">Personal</button>
+      <button class="tab" onclick="openTab(event,'employment')">Employment</button>
+      <button class="tab" onclick="openTab(event,'documents')">Documents</button>
+      <button class="tab" onclick="openTab(event,'salary')">Salary</button>
+    </div>
+
+    <!-- PERSONAL -->
+    <div class="tab-content active" id="personal">
+      <form class="form-grid">
+        <input type="text" placeholder="Full Name">
+        <input type="text" placeholder="Father's Name">
+        <input type="date" placeholder="Date of Birth">
+        <select>
+          <option>Gender</option>
+          <option>Male</option>
+          <option>Female</option>
+        </select>
+        <input type="text" placeholder="Origin Country">
+        <input type="email" placeholder="Email">
+        <input type="text" placeholder="Contact Number">
+        <textarea placeholder="Address"></textarea>
+      </form>
+    </div>
+
+    <!-- EMPLOYMENT -->
+    <div class="tab-content" id="employment">
+      <form class="form-grid">
+        <input type="text" placeholder="Employee ID" readonly>
+        <input type="text" placeholder="Designation">
+        <input type="text" placeholder="Department">
+        <input type="date" placeholder="Date of Joining">
+        <select>
+          <option>Status</option>
+          <option>Active</option>
+          <option>On Leave</option>
+        </select>
+      </form>
+    </div>
+
+    <!-- DOCUMENTS -->
+    <div class="tab-content" id="documents">
+      <form class="form-grid">
+        <input type="text" placeholder="Passport Number">
+        <input type="file">
+        <input type="text" placeholder="Visa Number">
+        <input type="file">
+      </form>
+    </div>
+
+    <!-- SALARY -->
+    <div class="tab-content" id="salary">
+      <form class="form-grid">
+        <input type="number" placeholder="Basic Salary">
+        <input type="number" placeholder="Transport Allowance">
+        <input type="number" placeholder="Food Allowance">
+        <input type="number" placeholder="Stay Allowance">
+
+        <select>
+          <option>Overtime Eligible</option>
+          <option>Yes</option>
+          <option>No</option>
+        </select>
+
+        <select>
+          <option>Airticket Eligible</option>
+          <option>Yes</option>
+          <option>No</option>
+        </select>
+
+        <select>
+          <option>Incentive Eligible</option>
+          <option>Yes</option>
+          <option>No</option>
+        </select>
+      </form>
+    </div>
+
+    <button class="save-btn">💾 Save Employee</button>
+
+  </main>
+</div>
+
+<script>
+function openTab(evt, tabId) {
+  document.querySelectorAll(".tab").forEach(t => t.classList.remove("active"));
+  document.querySelectorAll(".tab-content").forEach(c => c.classList.remove("active"));
+  evt.target.classList.add("active");
+  document.getElementById(tabId).classList.add("active");
+}
+</script>
+<script type="module">
+import { fetchEmployees } from './api.js';
+
+document.addEventListener("DOMContentLoaded", async () => {
+  const empId = localStorage.getItem("selectedEmployeeId");
+  if (!empId) return;
+
+  const employees = await fetchEmployees();
+  const emp = employees.find(e => e._id === empId);
+  if (!emp) return;
+
+  // Fill PERSONAL tab
+  document.querySelector("#personal input[placeholder='Full Name']").value = emp.name;
+  document.querySelector("#personal input[placeholder=\"Father's Name\"]").value = emp.fatherName || "";
+  document.querySelector("#personal input[placeholder='Date of Birth']").value = emp.dob || "";
+  document.querySelector("#personal select").value = emp.gender || "";
+  document.querySelector("#personal input[placeholder='Origin Country']").value = emp.origin || "";
+  document.querySelector("#personal input[placeholder='Email']").value = emp.email || "";
+  document.querySelector("#personal input[placeholder='Contact Number']").value = emp.contact || "";
+  document.querySelector("#personal textarea").value = emp.address || "";
+
+  // Fill EMPLOYMENT tab
+  document.querySelector("#employment input[placeholder='Employee ID']").value = emp._id;
+  document.querySelector("#employment input[placeholder='Designation']").value = emp.designation || "";
+  document.querySelector("#employment input[placeholder='Department']").value = emp.department || "";
+  document.querySelector("#employment input[placeholder='Date of Joining']").value = emp.joiningDate || "";
+  document.querySelector("#employment select").value = emp.status || "";
+
+  // Fill DOCUMENTS tab
+  document.querySelector("#documents input[placeholder='Passport Number']").value = emp.passportNumber || "";
+  document.querySelector("#documents input[placeholder='Visa Number']").value = emp.visaNumber || "";
+
+  // Fill SALARY tab
+  document.querySelector("#salary input[placeholder='Basic Salary']").value = emp.basicSalary || "";
+  document.querySelector("#salary input[placeholder='Transport Allowance']").value = emp.transport || "";
+  document.querySelector("#salary input[placeholder='Food Allowance']").value = emp.food || "";
+  document.querySelector("#salary input[placeholder='Stay Allowance']").value = emp.stay || "";
+
+  document.querySelector("#salary select:nth-of-type(1)").value = emp.overtimeEligible || "No";
+  document.querySelector("#salary select:nth-of-type(2)").value = emp.airticketEligible || "No";
+  document.querySelector("#salary select:nth-of-type(3)").value = emp.incentiveEligible || "No";
+});
+</script>
+
+</body>
+</html>

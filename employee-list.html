@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Employee List</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<div class="main">
+  <button class="back-btn" onclick="location.href='index.html'">← Back</button>
+  <h2>Employee List</h2>
+
+  <input type="text" id="searchEmp" placeholder="Search employee..." />
+
+  <table>
+    <thead>
+      <tr>
+        <th>ID</th>
+        <th>Name</th>
+        <th>Department</th>
+        <th>Position</th>
+        <th>Status</th>
+        <th>Salary</th>
+      </tr>
+    </thead>
+    <tbody id="employeeTable">
+      <!-- Populated from backend later -->
+    </tbody>
+  </table>
+</div>
+
+</body>
+</html>

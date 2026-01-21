@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Attendance</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<div class="main">
+  <button class="back-btn" onclick="location.href='index.html'">← Back</button>
+  <h2>Attendance</h2>
+
+  <table>
+    <thead>
+      <tr>
+        <th>ID</th>
+        <th>Name</th>
+        <th>Department</th>
+        <th>Status</th>
+      </tr>
+    </thead>
+    <tbody id="attendanceTable">
+      <!-- Populated from backend later -->
+    </tbody>
+  </table>
+</div>
+
+<script type="module">
+  import { fetchEmployees, markPresent, markAbsent } from './api.js';
+
+  async function loadAttendance() {
+    const employees = await fetchEmployees(); // fetch employee list
+    const table = document.getElementById("attendanceTable");
+    table.innerHTML = "";
+
+    employees.forEach(emp => {
+      const row = document.createElement("tr");
+
+      row.innerHTML = `
+        <td>${emp._id}</td>
+        <td>${emp.name}</td>
+        <td>${emp.department}</td>
+        <td>
+          <select class="status-dropdown" data-id="${emp._id}">
+            <option value="Active" ${emp.status === "Active" ? "selected" : ""}>Active</option>
+            <option value="On Leave" ${emp.status === "On Leave" ? "selected" : ""}>On Leave</option>
+          </select>
+        </td>
+      `;
+
+      table.appendChild(row);
+    });
+
+    // Attach event listeners for toggles
+    document.querySelectorAll(".status-dropdown").forEach(select => {
+      select.addEventListener("change", async (e) => {
+        const empId = e.target.dataset.id;
+        const newStatus = e.target.value;
+
+        // Update backend employee status
+        await fetch(`http://localhost:5000/api/employees/${empId}`, {
+          method: "PUT",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ status: newStatus })
+        });
+
+        alert(`Status updated to ${newStatus}`);
+      });
+    });
+  }
+
+  document.addEventListener("DOMContentLoaded", loadAttendance);
+</script>
+
+</body>
+</html>
