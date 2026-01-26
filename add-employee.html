@@ -37,7 +37,11 @@
       <form id="employeeForm" class="form-grid" enctype="multipart/form-data">
         <input type="text" placeholder="Full Name" name="name" required />
         <input type="email" placeholder="Email" name="email" required />
-        <input type="text" placeholder="Gender" name="gender" required />
+        <select name="gender" required>
+          <option value="">Gender</option>
+          <option value="Male">Male</option>
+          <option value="Female">Female</option>
+        </select>
         <input type="text" placeholder="Designation" name="designation" required />
         <input type="text" placeholder="Department" name="department" required />
         <input type="text" placeholder="Origin Country" name="originCountry" required />
@@ -46,7 +50,7 @@
         <input type="date" id="dob" name="dob" required /></div>
         <input type="text" placeholder="Father's Name" name="fatherName" required />
         <input type="text" placeholder="Contact Number" name="contact" required />
-        <input type="text" placeholder="Residential Address" name="Residentialaddress" required />
+        <input type="text" placeholder="Residential Address" name="residentialAddress" required />
         <input type="text" placeholder="Permanent Address" name="permanentAddress" required />
         <div class="form-group">
         <label for="doj">Date of Joining</label>
@@ -56,14 +60,17 @@
         <input type="text" placeholder="Passport Number" name="passportNumber" required />
         <input type="file" accept="image/*" name="passportCopy" required />
         <div class="form-group">
-        <label for="photo">Contract</label>
-        <input type="file" accept="image/*" name="photo" required /></div>
+          <label for="empPhoto">Employee Photo</label>
+          <input type="file" accept="image/*" name="empPhoto" id="empPhoto" required />
+          <label for="empContract">Contract Document</label>
+          <input type="file" accept="image/*" name="empContract" id="empContract" required />
+        </div>
         <input type="number" placeholder="Basic Salary" name="salary" required />
         <select name="status" required>
           <option value="">Status</option>
           <option value="Active">Active</option>
-          <option value="On Leave">On Leave</option>
         </select>
+
         <button type="submit" class="save-btn">Save Employee</button>
       </form>
     </section>
@@ -71,6 +78,6 @@
   </main>
 </div>
 
-<script type="module" src="employee.js"></script>
+<script src="add-employee.js"></script>
 </body>
 </html>

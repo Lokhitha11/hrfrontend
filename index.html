@@ -9,9 +9,10 @@
 <body>
 
 <div class="layout">
+  <!-- Sidebar -->
   <aside class="sidebar">
     <div class="logo">
-    <img src="SUH-Logov5.png" alt="Company Logo" />
+      <img src="SUH-Logov5.png" alt="Company Logo" />
     </div>
     <a href="index.html">Dashboard</a>
     <a href="add-employee.html">Add Employee</a>
@@ -20,25 +21,42 @@
     <a href="payroll.html">Payroll</a>
   </aside>
 
+  <!-- Main Content -->
   <main class="main">
     <header class="header">
-  <h1>Employees</h1>
-  <div class="user-login">
-    <span id="username">HR</span>
-    <div class="profile-circle">H</div>
-    <button onclick="location.href='login.html'">Login</button>
-  </div>
-</header>
+      <div class="dashboard-cards">
+        <div class="card">
+          <h3>Total Employees</h3>
+          <p id="totalEmployeesCard">0</p>
+        </div>
 
+        <div class="card">
+          <h3>Active Employees</h3>
+          <p id="activeEmployeesCard">0</p>
+        </div>
+
+        <div class="card">
+          <h3>On Leave</h3>
+          <p id="onLeaveEmployeesCard">0</p>
+        </div>
+      </div>
+
+      <div class="user-login">
+        <span id="username">HR</span>
+        <div class="profile-circle">H</div>
+        <button onclick="location.href='login.html'">Login</button>
+      </div>
+    </header>
 
     <section class="cards">
-      <div class="card">Total Employees: <span id="totalEmployees">0</span></div>
+      <div class="card">Total Employees: <span id="totalEmployeesSection">0</span></div>
       <div class="card">Today's Attendance: <span id="todayAttendance">0</span></div>
       <div class="card">Monthly Payroll: ₹<span id="totalPayroll">0</span></div>
-      <div class="card">Other Info</div>
+      
     </section>
   </main>
 </div>
 
+<script src="dashboard.js"></script>
 </body>
 </html>

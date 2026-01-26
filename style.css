@@ -9,7 +9,7 @@
 }
 
 body {
-  background: #ffffff; /* white background */
+  background: #ffffff;
   color: #333333;
 }
 
@@ -42,7 +42,14 @@ body {
 }
 
 .sidebar a:hover {
-  background: #3a44c1; /* hover blue */
+  background: #3a44c1;
+}
+
+/* Logo in sidebar */
+.sidebar .logo img {
+  width: 150px;
+  opacity: 0.7;
+  margin-bottom: 20px;
 }
 
 /* HEADER */
@@ -51,7 +58,7 @@ body {
   justify-content: space-between;
   align-items: center;
   padding: 20px;
-  background: #f2f2f2; /* gray header */
+  background: #f2f2f2;
   border-bottom: 1px solid #ccc;
 }
 
@@ -72,6 +79,11 @@ body {
 .main {
   flex: 1;
   padding: 25px;
+  max-width: 1200px;
+  margin: 20px auto;
+  background: #f9f9f9;
+  border-radius: 12px;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.1);
 }
 
 /* BUTTONS */
@@ -87,12 +99,13 @@ form {
   max-width: 500px;
 }
 
-input, select {
+input, select, textarea {
   width: 100%;
   padding: 10px;
   margin: 10px 0;
   border: 1px solid #ccc;
   border-radius: 6px;
+  font-size: 16px;
 }
 
 button.submit-btn {
@@ -108,142 +121,123 @@ button.submit-btn:hover {
   background: #3a44c1;
 }
 
+/* BACK BUTTON */
+.back-btn {
+  background-color: #1a1f71; /* navy theme */
+  color: white;
+  border: none;
+  padding: 8px 14px;
+  border-radius: 6px;
+  cursor: pointer;
+  margin-bottom: 15px;
+  transition: background 0.3s;
+}
+
+.back-btn:hover {
+  background-color: #3a44c1;
+}
+
+/* SEARCH BOX */
+#searchEmp {
+  width: 100%;
+  padding: 10px 12px;
+  margin-bottom: 15px;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  outline: none;
+  font-size: 16px;
+  transition: border-color 0.3s;
+}
+
+#searchEmp:focus {
+  border-color: #1a1f71;
+}
+
 /* TABLE STYLING */
 table {
   width: 100%;
   border-collapse: collapse;
-  margin-top: 20px;
+  background: white;
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.05);
 }
 
-th, td {
-  padding: 12px;
-  border-bottom: 1px solid #ccc;
-  text-align: left;
-}
-
-th {
-  background: #f2f2f2;
-}
-
-/* BACK BUTTON */
-.back-btn {
-  background: #1a1f71;
+thead {
+  background-color: #1a1f71; /* navy header */
   color: white;
-  border: none;
-  padding: 8px 12px;
-  margin-bottom: 15px;
-  border-radius: 5px;
-}
-
-.back-btn:hover {
-  background: #3a44c1;
-}
-
-/* RESPONSIVE */
-@media screen and (max-width: 768px) {
-  .layout {
-    flex-direction: column;
-  }
-
-  .sidebar {
-    width: 100%;
-    flex-direction: row;
-    justify-content: space-around;
-  }
-
-  .sidebar a {
-    margin: 8px 0;
-    font-size: 14px;
-  }
-}
-/* Logo in sidebar */
-.sidebar .logo img {
-  width: 150px;
-  opacity: 0.7;
-  margin-bottom: 20px;
-}
-
-/* Profile circle */
-.user-login {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-}
-
-.profile-circle {
-  width: 35px;
-  height: 35px;
-  border-radius: 50%;
-  background-color: navy;
-  color: white;
-  display: flex;
-  justify-content: center;
-  align-items: center;
   font-weight: bold;
 }
 
-/* Center Add Employee form */
-.add-employee-container {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
+th, td {
+  padding: 12px 15px;
+  text-align: left;
 }
 
-.add-employee-container form {
-  width: 100%;
-  max-width: 400px;
-  display: flex;
-  flex-direction: column;
-  gap: 15px;
-  
-}
-/* LOGIN PAGE */
-.login-page {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  height: 100vh; /* full viewport height */
-  background-color: #f5f6fa; /* light background */
+tbody tr {
+  border-bottom: 1px solid #eee;
+  transition: background 0.2s;
 }
 
-.login-container {
-  background-color: white;
-  padding: 30px 25px;
-  border-radius: 10px;
-  box-shadow: 0 6px 15px rgba(0,0,0,0.1);
-  width: 100%;
-  max-width: 400px;
-  text-align: center;
+tbody tr:hover {
+  background-color: #f1f1f1;
+  cursor: pointer;
 }
 
-.login-container h2 {
-  margin-bottom: 20px;
-  color: navy;
-}
-
-.login-container input {
-  width: 100%;
-  padding: 10px;
-  margin: 10px 0;
-  border-radius: 5px;
-  border: 1px solid #ccc;
-}
-
-.login-container button {
-  width: 100%;
-  padding: 10px;
-  margin-top: 10px;
-  background-color: navy;
+/* Buttons inside table */
+button.mark-status {
+  background-color: #4CAF50;
   color: white;
   border: none;
+  padding: 5px 10px;
   border-radius: 5px;
+  margin-right: 5px;
   cursor: pointer;
-  font-size: 16px;
+  transition: background 0.3s;
+}
+button.mark-status:hover {
+  background-color: #3e8e41;
 }
 
-.login-container button:hover {
-  background-color: #333366;
+button.delete-emp {
+  background-color: whitesmoke;
+  color: white;
+  border: none;
+  padding: 5px 10px;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background 0.3s;
 }
+button.delete-emp:hover {
+  background-color: #b30000;
+}
+
+/* Responsive table */
+@media screen and (max-width: 768px) {
+  table, thead, tbody, th, td, tr {
+    display: block;
+  }
+  thead tr {
+    display: none;
+  }
+  tbody tr {
+    margin-bottom: 15px;
+    border-bottom: 2px solid #1a1f71; /* navy */
+    padding: 10px;
+    border-radius: 8px;
+  }
+  td {
+    display: flex;
+    justify-content: space-between;
+    padding: 8px 0;
+  }
+  td::before {
+    content: attr(data-label);
+    font-weight: bold;
+    color: #333;
+  }
+}
+
 /* Tabs */
 .tabs {
   display: flex;
@@ -260,7 +254,7 @@ th {
 }
 
 .tab.active {
-  background: #1e3a8a;
+  background: #1a1f71; /* navy theme */
   color: white;
 }
 
@@ -278,101 +272,43 @@ th {
 /* Forms */
 .form-grid {
   display: grid;
-  grid-template-columns: 1fr 1fr; /* keep 2 columns */
-  gap: 20px; /* more space between columns */
+  grid-template-columns: 1fr 1fr;
+  gap: 20px;
 }
 
 .form-grid input,
 .form-grid select,
 .form-grid textarea {
-  padding: 14px;           /* bigger padding for readability */
+  padding: 14px;
   border-radius: 6px;
   border: 1px solid #ccc;
   width: 100%;
-  min-width: 0;            /* fixes text cutoff in grid */
+  min-width: 0;
   box-sizing: border-box;
-  font-size: 16px;         /* larger font */
+  font-size: 16px;
 }
 
-/* Make file uploads, address, and long fields span full width */
-.form-grid input[type="file"],
-.form-grid textarea,
-.form-grid input[name="address"],
-.form-grid input[name="visaCopy"],
-.form-grid input[name="passportCopy"],
-.form-grid input[name="photo"] {
-  grid-column: span 2;     /* take full row */
-}
-
-/* Optional: increase form container width */
-.add-employee-container form {
-  max-width: 700px;        /* bigger form */
-}
-
-/* Make file uploads and address fields span full width */
+/* File uploads & textarea spans */
 .form-grid input[type="file"],
 .form-grid textarea,
 .form-grid input[name="address"] {
-  grid-column: span 2;     /* take full row */
+  grid-column: span 2;
 }
-
 
 /* Save button */
 .save-btn {
   margin-top: 20px;
   padding: 12px 20px;
-  background: #1e3a8a;
+  background: #1a1f71;
   color: white;
   border: none;
   border-radius: 8px;
   cursor: pointer;
 }
 .save-btn:hover {
-  background: #374bbf;
-}
-/* ==============================
-   ADD EMPLOYEE FORM - SIDE BY SIDE GRID
-   ============================== */
-.add-employee-container form {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr); /* 3 columns side by side */
-  gap: 15px;
-  padding: 20px;
-  background: #f9f9f9;
-  border-radius: 10px;
+  background: #3a44c1;
 }
 
-/* Make all inputs, selects, file uploads full width */
-.add-employee-container form input,
-.add-employee-container form select,
-.add-employee-container form textarea,
-.add-employee-container form button {
-  width: 100%;
-  padding: 10px;
-  border-radius: 6px;
-  border: 1px solid #ccc;
-  font-size: 14px;
-}
-
-/* Textarea spans all columns */
-.add-employee-container form textarea {
-  grid-column: span 3;
-  resize: none;
-}
-
-/* Save button spans all columns */
-.add-employee-container form button.save-btn {
-  grid-column: span 3;
-  background: navy;
-  color: white;
-  border: none;
-  cursor: pointer;
-  font-weight: bold;
-}
-
-.add-employee-container form button.save-btn:hover {
-  background: darkblue;
-}
 /* Attendance status dropdown styling */
 .status-dropdown {
   padding: 6px 10px;
@@ -380,22 +316,91 @@ th {
   border: 1px solid #ccc;
   font-weight: bold;
   cursor: pointer;
-  color: white; /* text color */
+  color: white;
 }
 
-/* Different colors for options */
 .status-dropdown option[value="Active"] {
-  background-color: #28a745; /* green */
+  background-color: #28a745;
   color: white;
 }
 
 .status-dropdown option[value="On Leave"] {
-  background-color: #dc3545; /* red */
+  background-color: #dc3545;
   color: white;
 }
 
-/* When dropdown selected, show color based on value */
-.status-dropdown:focus,
-.status-dropdown:active {
-  color: white;
+/* Dashboard cards */
+.dashboard-cards {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 20px;
+  margin-top: 30px;
 }
+
+.card {
+  background: #f9f9f9;
+  border-radius: 10px;
+  padding: 25px;
+  text-align: center;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.08);
+}
+
+.card h3 {
+  margin-bottom: 10px;
+  color: #1a1f71;
+}
+
+.card p {
+  font-size: 28px;
+  font-weight: bold;
+}
+.save-btn {
+  padding: 12px 25px;
+  background-color: #1a1f71;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  font-size: 16px;
+  cursor: pointer;
+  transition: background 0.3s;
+}
+
+.save-btn:hover {
+  background-color: #3a44c1;
+}
+
+/* View Document Buttons (Passport / Visa / Contract) */
+#empPassportCopy,
+#empVisaCopy,
+#empContractLink {
+  display: inline-block;
+  padding: 8px 14px;
+  background: #1a1f71; /* main theme */
+  color: #ffffff;
+  font-size: 14px;
+  font-weight: 500;
+  text-decoration: none;
+  border-radius: 6px;
+  transition: all 0.25s ease;
+  box-shadow: 0 4px 10px rgba(26, 31, 113, 0.25);
+  margin-top: 4px;
+}
+
+/* Hover */
+#empPassportCopy:hover,
+#empVisaCopy:hover,
+#empContractLink:hover {
+  background: #6c63ff; /* accent */
+  transform: translateY(-2px);
+  box-shadow: 0 6px 14px rgba(108, 99, 255, 0.35);
+}
+
+/* Disabled / No document */
+.no-doc {
+  background: #cccccc !important;
+  color: #666666 !important;
+  cursor: not-allowed;
+  pointer-events: none;
+  box-shadow: none !important;
+}
+
