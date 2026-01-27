@@ -35,43 +35,53 @@
 
     <section class="add-employee-container">
       <form id="employeeForm" class="form-grid" enctype="multipart/form-data">
-        <input type="text" placeholder="Full Name" name="name" required />
-        <input type="email" placeholder="Email" name="email" required />
-        <select name="gender" required>
+
+        <input type="text" id="empName" placeholder="Full Name" name="name" required />
+        <input type="email" id="empEmail" placeholder="Email" name="email" required />
+        <select id="empGender" name="gender" required>
           <option value="">Gender</option>
           <option value="Male">Male</option>
           <option value="Female">Female</option>
         </select>
-        <input type="text" placeholder="Designation" name="designation" required />
-        <input type="text" placeholder="Department" name="department" required />
-        <input type="text" placeholder="Origin Country" name="originCountry" required />
-       <div class="form-group">
-        <label for="dob">Date of Birth</label>
-        <input type="date" id="dob" name="dob" required /></div>
-        <input type="text" placeholder="Father's Name" name="fatherName" required />
-        <input type="text" placeholder="Contact Number" name="contact" required />
-        <input type="text" placeholder="Residential Address" name="residentialAddress" required />
-        <input type="text" placeholder="Permanent Address" name="permanentAddress" required />
+        <input type="text" id="empDesignation" placeholder="Designation" name="designation" required />
+        <input type="text" id="empDepartment" placeholder="Department" name="department" required />
+        <input type="text" id="empOrigin" placeholder="Origin Country" name="originCountry" required />
+        
         <div class="form-group">
-        <label for="doj">Date of Joining</label>
-        <input type="date" id="doj" name="doj" required /></div>
-        <input type="text" placeholder="Visa Number" name="visaNumber" required />
-        <input type="file" accept="image/*" name="visaCopy" required />
-        <input type="text" placeholder="Passport Number" name="passportNumber" required />
-        <input type="file" accept="image/*" name="passportCopy" required />
+          <label for="dob">Date of Birth</label>
+          <input type="date" id="empDOB" name="dob" required />
+        </div>
+
+        <input type="text" id="empFather" placeholder="Father's Name" name="fatherName" required />
+        <input type="text" id="empContact" placeholder="Contact Number" name="contact" required />
+        <input type="text" id="empResidential" placeholder="Residential Address" name="residentialAddress" required />
+        <input type="text" id="empPermanent" placeholder="Permanent Address" name="permanentAddress" required />
+
+        <div class="form-group">
+          <label for="doj">Date of Joining</label>
+          <input type="date" id="empDOJ" name="doj" required />
+        </div>
+
+        <input type="text" id="empVisaNum" placeholder="Visa Number" name="visaNumber" required />
+        <input type="file" id="empVisaCopy" accept="image/*" name="visaCopy" required />
+        <input type="text" id="empPassportNum" placeholder="Passport Number" name="passportNumber" required />
+        <input type="file" id="empPassportCopy" accept="image/*" name="passportCopy" required />
+
         <div class="form-group">
           <label for="empPhoto">Employee Photo</label>
           <input type="file" accept="image/*" name="empPhoto" id="empPhoto" required />
           <label for="empContract">Contract Document</label>
           <input type="file" accept="image/*" name="empContract" id="empContract" required />
         </div>
-        <input type="number" placeholder="Basic Salary" name="salary" required />
-        <select name="status" required>
+
+        <input type="number" id="empSalary" placeholder="Basic Salary" name="salary" required />
+
+        <select id="empStatus" name="status" required>
           <option value="">Status</option>
           <option value="Active">Active</option>
         </select>
 
-        <button type="submit" class="save-btn">Save Employee</button>
+        <button type="submit" class="add-btn">Add Employee</button>
       </form>
     </section>
 
