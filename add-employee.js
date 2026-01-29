@@ -1,15 +1,20 @@
+/*******************************
+ * Add Employee JS (Backend-ready)
+ *******************************/
+
 document.addEventListener("DOMContentLoaded", () => {
 
   const API_BASE = "http://localhost:5000/api/employees";
   const form = document.getElementById("employeeForm");
+  const addBtn = document.querySelector(".add-btn");
 
-  if (!form) {
-    console.error("Form not found (#employeeForm)");
+  if (!addBtn) {
+    console.error("Add button not found (.add-btn)");
     return;
   }
 
-  form.addEventListener("submit", async (e) => {
-    e.preventDefault(); // 🚫 stop browser refresh
+  addBtn.addEventListener("click", async (e) => {
+    e.preventDefault();
 
     const formData = new FormData(form);
 
@@ -20,20 +25,23 @@ document.addEventListener("DOMContentLoaded", () => {
       });
 
       if (!res.ok) {
-        throw new Error("Backend error while adding employee");
+        const text = await res.text(); // get error HTML if any
+        throw new Error(text || "Failed to add employee");
       }
 
       const savedEmployee = await res.json();
 
-      // store ID for profile page
+      // store employee id for profile page
       localStorage.setItem("selectedEmployeeId", savedEmployee.id);
 
-      // 🔥 REDIRECT (this WILL work now)
-      window.location.replace("employee-profile.html");
+      alert("Employee added successfully!");
+
+      // redirect to profile
+      window.location.href = "employee-profile.html";
 
     } catch (err) {
       console.error(err);
-      alert("Error adding employee");
+      alert("Error adding employee: " + err.message);
     }
   });
 
