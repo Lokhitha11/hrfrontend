@@ -1,95 +1,37 @@
-<!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Attendance</title>
   <link rel="stylesheet" href="style.css">
+  <title>Attendance</title>
 </head>
+
 <body>
 
-<div class="main">
-  <button class="back-btn" onclick="location.href='index.html'">← Back</button>
+  <button class="back-btn" onclick="location.href='index.html'" style="margin: 10px;">← Back</button>
   <h2>Attendance</h2>
+  
+
+  <label>
+    Select Date:
+    <input type="date" id="attendanceDate" />
+  </label>
 
   <table>
     <thead>
       <tr>
         <th>ID</th>
         <th>Name</th>
-        <th>Department</th>
-        <th>Present</th>
-        <th>Absent</th>
+        <th>Status</th>
       </tr>
     </thead>
-    <tbody id="attendanceTable">
-      <!-- Populated dynamically -->
-    </tbody>
+    <tbody id="attendanceTable"></tbody>
   </table>
-</div>
 
-<script>
-  // ==========================
-  // Attendance Page JS
-  // ==========================
-  const tableBody = document.getElementById("attendanceTable");
-
-  // Load employees from localStorage
-  let employees = JSON.parse(localStorage.getItem("employees")) || [];
-
-  function renderAttendance() {
-    tableBody.innerHTML = "";
-    employees.forEach(emp => {
-      const row = document.createElement("tr");
-
-      row.innerHTML = `
-        <td>${emp.id}</td>
-        <td class="emp-name" data-id="${emp.id}" style="cursor:pointer; color:blue;">${emp.name}</td>
-        <td>${emp.department}</td>
-        <td><button class="mark-present" data-id="${emp.id}" ${emp.status === "Active" ? "disabled" : ""}>Present</button></td>
-        <td><button class="mark-absent" data-id="${emp.id}" ${emp.status === "On Leave" ? "disabled" : ""}>Absent</button></td>
-      `;
-
-      tableBody.appendChild(row);
-    });
-  }
-
-  renderAttendance();
-
-  // ==========================
-  // Click Events
-  // ==========================
-  document.addEventListener("click", function(e) {
-    // Go to profile
-    if (e.target.classList.contains("emp-name")) {
-      const empId = e.target.dataset.id;
-      localStorage.setItem("selectedEmployeeId", empId);
-      window.location.href = "employee-profile.html";
-    }
-
-    // Mark Present
-    if (e.target.classList.contains("mark-present")) {
-      const id = e.target.dataset.id;
-      const emp = employees.find(emp => emp.id == id);
-      if (emp) {
-        emp.status = "Active";
-        localStorage.setItem("employees", JSON.stringify(employees));
-        renderAttendance(); // refresh table
-      }
-    }
-
-    // Mark Absent
-    if (e.target.classList.contains("mark-absent")) {
-      const id = e.target.dataset.id;
-      const emp = employees.find(emp => emp.id == id);
-      if (emp) {
-        emp.status = "On Leave";
-        localStorage.setItem("employees", JSON.stringify(employees));
-        renderAttendance(); // refresh table
-      }
-    }
-  });
-</script>
-
+  <button id="saveAttendance">Save Attendance</button>
 </body>
+
+<script src="attendance.js"></script>
+
 </html>
