@@ -1,37 +1,41 @@
+<!DOCTYPE html>
 <html lang="en">
-
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="stylesheet" href="style.css">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Attendance</title>
+  <link rel="stylesheet" href="style.css" />
 </head>
-
 <body>
 
-  <button class="back-btn" onclick="location.href='index.html'" style="margin: 10px;">← Back</button>
-  <h2>Attendance</h2>
-  
+<div class="main">
+  <button class="back-btn" onclick="location.href='index.html'">← Back</button>
 
-  <label>
-    Select Date:
+  <h2>Employee Attendance</h2>
+
+  <div class="attendance-controls">
+    <label for="attendanceDate">Select Date:</label>
     <input type="date" id="attendanceDate" />
-  </label>
+    <button id="loadEmployeesBtn">Load Employees</button>
+  </div>
 
-  <table>
+  <table class="attendance-table">
     <thead>
       <tr>
-        <th>ID</th>
-        <th>Name</th>
+        <th>#</th>
+        <th>Employee Name</th>
         <th>Status</th>
+        <th>Overtime Hours</th>
       </tr>
     </thead>
-    <tbody id="attendanceTable"></tbody>
+    <tbody id="attendanceTableBody">
+      <!-- Rows will be injected here -->
+    </tbody>
   </table>
 
-  <button id="saveAttendance">Save Attendance</button>
-</body>
+  <button id="saveAttendanceBtn" class="save-btn">Save Attendance</button>
+</div>
 
 <script src="attendance.js"></script>
-
+</body>
 </html>

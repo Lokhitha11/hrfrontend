@@ -1,35 +1,34 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Payroll</title>
-  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="style.css" />
 </head>
 <body>
-
 <div class="main">
   <button class="back-btn" onclick="location.href='index.html'">← Back</button>
   <h2>Payroll</h2>
 
-  <table>
+  <table class="payroll-table">
     <thead>
       <tr>
-        <th>Name</th>
+        <th>#</th>
+        <th>Employee Name</th>
         <th>Basic Salary</th>
-        <th>Overtime</th>
-        <th>Deductions</th>
-        <th>Net Pay</th>
+        <th>Absent Days</th>
+        <th>Absent Deduction</th>
+        <th>Overtime Amount</th>
+        <th>Final Salary</th>
       </tr>
     </thead>
-    <tbody id="payrollTable">
-      <!-- Populated from backend later -->
+    <tbody id="payrollTableBody">
+      <!-- Payroll rows will be injected here -->
     </tbody>
   </table>
-
-  <h3>Total Payroll: ₹<span id="totalPayroll">0</span></h3>
 </div>
-<script src="payroll.js"></script>
 
+<script src="payroll.js"></script>
 </body>
 </html>

@@ -1,38 +1,30 @@
-// ==========================
-// Payroll JS
-// ==========================
+document.addEventListener("DOMContentLoaded", async () => {
+  const API_PAYROLL = "http://localhost:5000/api/payroll";
+  const tableBody = document.getElementById("payrollTableBody");
 
-// Get payroll table body and total payroll element
-const payrollTable = document.getElementById("payrollTable");
-const totalPayrollEl = document.getElementById("totalPayroll");
+  try {
+    const res = await fetch(API_PAYROLL);
+    if (!res.ok) throw new Error("Failed to fetch payroll");
+    const payroll = await res.json();
 
-// Load employees from localStorage
-let employees = JSON.parse(localStorage.getItem("employees")) || [];
+    tableBody.innerHTML = "";
 
-// Clear table
-payrollTable.innerHTML = "";
+    payroll.forEach((emp, idx) => {
+      const row = document.createElement("tr");
+      row.innerHTML = `
+        <td>${idx + 1}</td>
+        <td>${emp.name}</td>
+        <td>${emp.basicSalary}</td>
+        <td>${emp.absentDays}</td>
+        <td>${emp.absentDeduction}</td>
+        <td>${emp.overtimeAmount}</td>
+        <td>${emp.finalSalary}</td>
+      `;
+      tableBody.appendChild(row);
+    });
 
-let totalPayroll = 0;
-
-employees.forEach(emp => {
-  // Default allowances and deductions (for now)
-  const basic = Number(emp.salary) || 0;
-  const overtime = Number(emp.overtime || 0);
-  const deductions = Number(emp.deductions || 0);
-  const netPay = basic + overtime - deductions;
-
-  totalPayroll += netPay;
-
-  const row = document.createElement("tr");
-  row.innerHTML = `
-    <td>${emp.name}</td>
-    <td>₹${basic.toLocaleString()}</td>
-    <td>₹${overtime.toLocaleString()}</td>
-    <td>₹${deductions.toLocaleString()}</td>
-    <td>₹${netPay.toLocaleString()}</td>
-  `;
-  payrollTable.appendChild(row);
+  } catch (err) {
+    console.error(err);
+    tableBody.innerHTML = `<tr><td colspan="7">Error loading payroll: ${err.message}</td></tr>`;
+  }
 });
-
-// Update total payroll
-totalPayrollEl.textContent = totalPayroll.toLocaleString();

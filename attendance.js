@@ -1,67 +1,71 @@
-document.addEventListener("DOMContentLoaded", async () => {
-
+document.addEventListener("DOMContentLoaded", () => {
   const API_EMP = "http://localhost:5000/api/employees";
   const API_ATT = "http://localhost:5000/api/attendance";
 
-  const tableBody = document.getElementById("attendanceTable");
-  const saveBtn = document.getElementById("saveAttendance");
   const dateInput = document.getElementById("attendanceDate");
-
-  if (!tableBody || !saveBtn || !dateInput) {
-    console.error("Attendance elements missing!");
-    return;
-  }
+  const loadBtn = document.getElementById("loadEmployeesBtn");
+  const saveBtn = document.getElementById("saveAttendanceBtn");
+  const tableBody = document.getElementById("attendanceTableBody");
 
   let employees = [];
-  let attendance = [];
+  let attendanceRecords = [];
 
   // -------------------------
-  // Default date = today
+  // Utility: get day type
   // -------------------------
-  const today = new Date().toISOString().slice(0, 10);
-  dateInput.value = today;
+  function getDayType(dateStr) {
+    const day = new Date(dateStr).getDay();
+    return day === 0 ? "Sunday" : "Weekday"; // 0 = Sunday
+  }
 
   // -------------------------
   // Load employees
   // -------------------------
   async function loadEmployees() {
-    const res = await fetch(API_EMP);
-    employees = await res.json();
-  }
+    const selectedDate = dateInput.value;
+    if (!selectedDate) return alert("Please select a date first!");
 
-  // -------------------------
-  // Load attendance
-  // -------------------------
-  async function loadAttendance() {
-    const res = await fetch(API_ATT);
-    attendance = await res.json();
+    try {
+      const res = await fetch(API_EMP);
+      if (!res.ok) throw new Error("Failed to fetch employees");
+      employees = await res.json();
+
+      // Load existing attendance for this date
+      const attRes = await fetch(API_ATT);
+      const allAttendance = await attRes.json();
+      attendanceRecords = allAttendance.filter(a => a.date === selectedDate);
+
+      renderTable(selectedDate);
+    } catch (err) {
+      console.error(err);
+      alert("Error loading employees: " + err.message);
+    }
   }
 
   // -------------------------
   // Render table
   // -------------------------
-  function renderTable() {
+  function renderTable(date) {
     tableBody.innerHTML = "";
-    const selectedDate = dateInput.value;
-
-    employees.forEach(emp => {
-      const record = attendance.find(
-        a => a.empId === emp.id && a.date === selectedDate
-      );
+    employees.forEach((emp, idx) => {
+      // Check if attendance exists for this emp & date
+      const record = attendanceRecords.find(a => a.empId === emp.id) || {};
 
       const row = document.createElement("tr");
       row.innerHTML = `
-        <td>${emp.id}</td>
+        <td>${idx + 1}</td>
         <td>${emp.name}</td>
         <td>
-          <select data-id="${emp.id}">
-            <option value="">Select</option>
-            <option value="Present" ${record?.status === "Present" ? "selected" : ""}>Present</option>
-            <option value="Absent" ${record?.status === "Absent" ? "selected" : ""}>Absent</option>
-         
+          <select class="statusSelect">
+            <option value="Present" ${record.status === "Present" ? "selected" : ""}>Present</option>
+            <option value="Absent" ${record.status === "Absent" ? "selected" : ""}>Absent</option>
           </select>
         </td>
+        <td>
+          <input type="number" min="0" class="overtimeInput" value="${record.overtimeHours || 0}" />
+        </td>
       `;
+      row.dataset.empId = emp.id;
       tableBody.appendChild(row);
     });
   }
@@ -71,47 +75,43 @@ document.addEventListener("DOMContentLoaded", async () => {
   // -------------------------
   saveBtn.addEventListener("click", async () => {
     const selectedDate = dateInput.value;
-    const selects = document.querySelectorAll("select[data-id]");
-    const records = [];
+    if (!selectedDate) return alert("Please select a date first!");
 
-    selects.forEach(sel => {
-      if (!sel.value) return;
-      records.push({
-        empId: parseInt(sel.dataset.id),
+    const rows = tableBody.querySelectorAll("tr");
+    const dataToSave = [];
+
+    rows.forEach(row => {
+      const empId = Number(row.dataset.empId);
+      const name = row.children[1].textContent;
+      const status = row.querySelector(".statusSelect").value;
+      const overtimeHours = Number(row.querySelector(".overtimeInput").value || 0);
+      const dayType = getDayType(selectedDate);
+
+      dataToSave.push({
+        empId,
+        name,
         date: selectedDate,
-        status: sel.value
+        status,
+        dayType,
+        overtimeHours
       });
     });
 
-    if (!records.length) {
-      alert("No attendance selected");
-      return;
+    try {
+      const res = await fetch(API_ATT, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(dataToSave)
+      });
+
+      if (!res.ok) throw new Error("Failed to save attendance");
+
+      alert("Attendance saved successfully!");
+    } catch (err) {
+      console.error(err);
+      alert("Error saving attendance: " + err.message);
     }
-
-    const res = await fetch(API_ATT, {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify(records)
-    });
-
-    if (!res.ok) {
-      alert("Failed to save attendance");
-      return;
-    }
-
-    alert("Attendance saved!");
-    await loadAttendance();
   });
 
-  // -------------------------
-  // Change date → reload
-  // -------------------------
-  dateInput.addEventListener("change", renderTable);
-
-  // -------------------------
-  // Initial load
-  // -------------------------
-  await loadEmployees();
-  await loadAttendance();
-  renderTable();
+  loadBtn.addEventListener("click", loadEmployees);
 });
